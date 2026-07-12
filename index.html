@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Character Art Pipeline — Demo</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #14161c;
+      color: #e8e8ed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 960px;
+      width: 100%;
+      padding: 40px 20px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(120, 80, 255, 0.3);
+    }
+    h1 {
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, #7850ff, #00c8c8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: #8c8ca0;
+      font-size: 1.1rem;
+    }
+    .video-wrapper {
+      background: #1e2028;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+    }
+    .video-wrapper video {
+      width: 100%;
+      display: block;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    .feature {
+      background: #1e2028;
+      border: 1px solid #2a2d38;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+    .feature h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+    .feature p {
+      color: #8c8ca0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #7850ff, #00c8c8);
+      color: white;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin: 20px 0;
+      text-decoration: none;
+    }
+    .badge:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 20px rgba(120, 80, 255, 0.4);
+    }
+    .footer {
+      color: #5a5a70;
+      font-size: 0.85rem;
+      margin-top: 40px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="logo.jpg" alt="AI Character Art Pipeline" class="logo">
+      <h1>AI Character Art Pipeline</h1>
+      <p class="subtitle">One reference image → Full character bible for indie game devs</p>
+    </div>
+
+    <div class="video-wrapper">
+      <video controls poster="screenshot.jpg" preload="metadata">
+        <source src="demo-30s.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🎭</div>
+        <h3>Expression Grid</h3>
+        <p>8 consistent expressions in one image — happy, sad, surprised, and more</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔄</div>
+        <h3>5-Angle Turnaround</h3>
+        <p>Front, 3/4, side, and rear views — exact same character, every angle</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🏃</div>
+        <h3>Action Poses</h3>
+        <p>Any pose you describe — running, jumping, casting, idle — fully consistent</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📖</div>
+        <h3>Character Bible</h3>
+        <p>Markdown document: color palette, design notes, all prompts, usage guide</p>
+      </div>
+    </div>
+
+    <div style="text-align: center;">
+      <a href="https://www.agensi.io/skills/ai-character-art-pipeline" class="badge" target="_blank">Available on Agensi — $7.99</a>
+    </div>
+
+    <div class="footer">
+      <p>Built by Overnight Money Team — Indie game art, consistent at scale</p>
+    </div>
+  </div>
+</body>
+</html>

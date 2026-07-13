@@ -4,7 +4,7 @@ description: >-
   Take ONE reference image and generate consistent character sheets,
   expression grids, and turnaround views. Designed for indie game devs
   who need character art that stays on-model across every asset.
-author: Overnight Money Team
+author: Elston Gunn
 version: 1.0.0
 license: MIT
 platforms: [linux, macos, windows]

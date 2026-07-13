@@ -125,7 +125,7 @@ def frame_01_title():
     draw.text(((W - sw) // 2, H//2 + 20), s, fill=GRAY, font=font_sub)
     # Badge
     draw.rounded_rectangle([W//2 - 100, H//2 + 70, W//2 + 100, H//2 + 110], radius=20, fill=ACCENT)
-    draw.text((W//2 - 56, H//2 + 78), "by Overnight Money Team", fill="white", font=load_font_regular(TINY_FONT))
+    draw.text((W//2 - 44, H//2 + 78), "by Elston Gunn", fill="white", font=load_font_regular(TINY_FONT))
     img.save(f"{OUT}/frame_001_title.png")
 
 def frame_02_input():

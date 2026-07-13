@@ -6,7 +6,7 @@ import os
 
 W, H = 1280, 720
 OUT = "/home/jimmy/hermes-gbrain-content/deploy/ai-character-art-pipeline/frames"
-FOX_PATH = "/home/jimmy/hermes-gbrain-content/deploy/ai-character-art-pipeline/fox-art-crop.png"
+FOX_PATH = "/home/jimmy/hermes-gbrain-content/deploy/ai-character-art-pipeline/fox-character-art.jpg"
 os.makedirs(OUT, exist_ok=True)
 
 # Colors

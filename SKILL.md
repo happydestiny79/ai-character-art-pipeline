@@ -1,132 +1,144 @@
 ---
 name: ai-character-art-pipeline
-description: >-
-  Take ONE reference image and generate consistent character sheets,
-  expression grids, and turnaround views. Designed for indie game devs
-  who need character art that stays on-model across every asset.
 author: Elston Gunn
+description: "One reference image → full character bible: expression sheets, turnaround views, action poses, and style-locked prompts. Built for creators who need on-model AI art at scale."
+price: "$7.99 (one-time) / 40 credits"
+category: "Design & Art"
+compatible: ["Claude Code", "Codex CLI", "Cursor", "Gemini CLI", "OpenClaw", "Windsurf", "GitHub Copilot", "VS Code", "Continue.dev", "Cline", "Aider", "MCP-enabled agents", "20+ SKILL.md agents"]
 version: 1.0.0
-license: MIT
-platforms: [linux, macos, windows]
-tags: [character-art, game-dev, ai-art, consistency, character-sheet]
-metadata:
-  hermes:
-    tags: [character-art, game-dev, ai-art, consistency, character-sheet]
-    related_skills: []
 ---
 
 # AI Character Art Pipeline
 
-**The hardest problem in AI game art is consistency.** An AI that nails a character in one image will change their face, outfit, or proportions in the next. This pipeline solves that: feed it a single reference image and get a full character bible — expression sheets, turnaround views, action poses — plus the exact prompts to reproduce the character in any scenario.
+**One reference image → Full character consistency.**  
+Generate expression sheets, 5-angle turnarounds, action poses, and a complete character bible — all from a single reference image. No more AI art that changes the character's face between generations.
 
-Designed for **indie game developers**, **visual novel creators**, and **children's book authors** who need art that stays on-model across hundreds of assets.
+## Why This Exists
 
----
+The hardest problem in AI-generated character art is **consistency**. An AI that nails a character in one image will change their face, outfit, or proportions in the next — sometimes subtly, sometimes completely.
+
+Without a structured pipeline, every regeneration risks:
+- Different facial features from one image to the next
+- Changing outfit colors or design details
+- Proportions that drift between poses
+- No way to reproduce a specific expression or angle
+
+This pipeline solves that by locking the character's core features from a single reference and generating all variations **on-model**.
 
 ## What You Get
 
-| Deliverable | Description |
-|---|---|
-| **Expression Sheet (2×4 grid)** | 8 consistent expressions on one image — happy, sad, surprised, curious, worried, sleepy, playful, default |
-| **Turnaround Sheet (5-pose)** | Front, 3/4 front, side profile, 3/4 back, rear — exact same character |
-| **Action Pose Sheets** | Any pose you describe (running, jumping, casting, idle) |
-| **Style Lock Prompts** | Pre-computed prompt templates that reproduce the character accurately |
-| **Character Bible** | Markdown document: color palette, design notes, all prompts, usage guide |
+### 🎭 Expression Sheet
+8 consistent expressions in one image — happy, sad, surprised, curious, worried, sleepy, playful, and default. All from your single reference.
+
+### 🔄 5-Angle Turnaround
+Front, 3/4 front, side profile, 3/4 back, and rear views. Exact same character, every angle — no style drift between views.
+
+### 🏃 Action Poses
+Any pose you describe — running, jumping, casting, idle — fully consistent with your reference character. Dynamic results, every time.
+
+### 📖 Character Bible
+Markdown document: color palette extracted from reference, design notes, all generation prompts, and a usage guide for future reproductions.
+
+### 🔒 Style Lock Prompts
+Pre-computed prompt templates that reproduce the character accurately in any scenario. Plug and play with your preferred image model.
 
 ## How It Works
 
-1. **Drop in one reference image** — any headshot or full-body render
-2. **Pipeline generates 4 key outputs** using image-to-image AI:
-   - Expression sheet (single image, 8 expressions)
-   - Turnaround sheet (single image, 5 angles)
-   - Action pose sheet (your choice of pose)
-   - Style-locked prompt templates
-3. **Character Bible** is compiled automatically with all assets referenced
+### Step 1: Drop Reference
+Provide a single image of your character — any headshot, full-body render, or concept art. One image is all the pipeline needs to lock the character's core features.
 
-The pipeline works with any image generation model that supports image-to-image. It sends the reference as the structural anchor and describes the desired variation in the prompt — the character's features stay locked while the expression/angle/pose changes.
+### Step 2: Generate Outputs
+The pipeline produces 4 core deliverables using image-to-image AI: expression sheet, turnaround views, action poses, and style-locked prompt templates — all referencing your original image.
 
-## Installation
+### Step 3: Export Bible
+A complete character bible is compiled automatically: color palette, design notes, all prompts, and a usage guide. Ready to hand off to any artist or AI agent.
+
+## Quick Start
 
 ```bash
-# Copy the SKILL.md to your agent's skills directory
-cp SKILL.md ~/.hermes/skills/ai-character-art-pipeline/
-
-# Load it
-hermes skill load ai-character-art-pipeline
+# Load the skill in your agent
+# Then provide your reference image:
+character-pipeline --reference ./character.png --expressions happy,sad,surprised,curious,worried,sleepy,playful,default
 ```
 
-Or just paste this in your agent chat:
+### Output Structure
 ```
-Load the ai-character-art-pipeline skill
-```
-
-## Usage
-
-Once loaded, call the pipeline:
-
-### Full Pipeline (recommended)
-
-```
-Run the AI Character Art Pipeline:
-- Reference image: [URL or path to character reference]
-- Character name: [e.g. "Lila"]
-- Expressions: happy, sad, surprised, curious, worried, sleepy, playful, neutral
-- Turnaround: yes
-- Style: [cartoon / realistic / pixel-art / your-style]
+./character-output/
+├── expression-sheet.png      # 8 expressions in grid
+├── turnaround.png            # 5-angle turnaround
+├── action-poses/             # Pose images
+│   ├── running.png
+│   ├── jumping.png
+│   └── idle.png
+├── character-bible.md        # Color palette, prompts, notes
+└── style-lock-prompts.txt    # Reusable prompt templates
 ```
 
-### Single Output
+## Use Cases
 
-```
-Generate an expression sheet for [character name]:
-- Reference: [URL]
-- Expressions: happy, sad, surprised
-- Output: single 2×? grid image
-```
+### 🎮 Indie Game Developers
+Need character sprites, portraits, and concept art that stays on-model across hundreds of assets. One reference → consistent art for every character in your game.
 
-### Export Character Bible
+### 📖 Visual Novel Creators
+Expression-accurate characters for every dialogue scene. The pipeline generates 8 consistent expressions from one reference, so your protagonist looks the same in every scene.
 
-```
-Compile character bible for [character name]:
-- Include: expression sheet, turnaround, action poses, color palette
-- Format: markdown
-```
+### 👶 Children's Book Authors
+The same character on every page spread — no style drift from cover to cover. Generate the character in any pose the story needs.
 
-## Example Outputs
+### 🎬 Animation Pre-Vis
+Turnaround sheets and pose references for storyboarding. Lock the character design early so animators don't waste time correcting inconsistent features.
 
-The pipeline was tested on a range of character types:
+### 🤖 AI Art Power Users
+Anyone generating character art with AI who's frustrated by inconsistency. The pipeline provides the prompt engineering and workflow structure to keep results on-model.
 
-- **Cartoon fox mascot** → 8/8 consistent expressions, perfect turnaround
-- **Anime-style human** → 7/8 expressions consistent (1 needed retry on extreme angle)
-- **Realistic human** → requires high-quality reference for best results
-- **Pixel art character** → excellent consistency, works in any resolution
+## Compatibility
+
+| Platform | Status | Notes |
+|----------|--------|-------|
+| Claude Code | ✅ | Full support |
+| Codex CLI | ✅ | Full support |
+| Cursor | ✅ | Full support |
+| Gemini CLI | ✅ | Full support |
+| GitHub Copilot | ✅ | Full support |
+| OpenClaw | ✅ | Full support |
+| Windsurf | ✅ | Full support |
+| VS Code | ✅ | Full support |
+| + 20+ agents | ✅ | Any SKILL.md-compatible |
 
 ## FAQ
 
-**Q: What AI model do I need?**
-Any model with image-to-image capability. The pipeline has been tested with xAI Grok, Midjourney, and Stable Diffusion-based models.
+**What AI model do I need?**  
+Any model with image-to-image capability. Tested with xAI Grok, Midjourney, and Stable Diffusion.
 
-**Q: Do I need API keys?**
-The pipeline itself is a prompt-based workflow — no keys. Your agent uses whatever image generation backend it has access to.
+**Do I need API keys?**  
+The pipeline itself is a prompt-based workflow — no keys required. Your agent uses whatever image generation backend it has access to.
 
-**Q: Can I add my own expressions/poses?**
+**Can I add my own expressions or poses?**  
 Absolutely. The pipeline accepts any list of expressions or poses you describe.
 
-**Q: Does this work for pixel art?**
-Yes. Works especially well for pixel art since the constraints are tighter.
+**Does this work for pixel art?**  
+Yes — works especially well for pixel art since the constraints are tighter and small feature changes are more noticeable.
 
-**Q: How long does it take?**
+**How long does it take?**  
 ~30 seconds per sheet once the reference is loaded. The full pipeline (expression + turnaround + 2 poses + bible) completes in about 3 minutes.
 
-**Q: Can I use it for non-game projects?**
-Yes — visual novels, children's books, comics, animation pre-vis, and character-driven web apps all benefit.
+**What's included in the purchase?**  
+A complete SKILL.md file with all pipeline instructions, prompt templates, and usage guide. Drop it into your agent and generate character art immediately.
 
-## Requirements
+## Safety & Permissions
 
-- Hermes Agent (or any agent framework that loads SKILL.md skills)
-- Image generation capability with image-to-image support
-- One character reference image
+| Scope | Details |
+|-------|---------|
+| Prompt / Text | Generates structured prompts for your image generation backend. No external API calls from the skill itself. |
+| File Scopes | Reads your reference image. Writes generated outputs locally. Nothing is uploaded. |
+| Image Generation | Uses whatever backend your agent has (local or API-based). The skill only provides the prompt structure. |
 
-## License
+🔒 No network calls from the skill. No telemetry. No API keys. Your reference image stays local.
 
-MIT — use it in commercial projects, modify it, sell your game art made with it.
+## Get It
+
+- **Agensi**: https://www.agensi.io/skills/ai-character-art-pipeline — $7.99 one-time
+
+---
+
+*Built by Elston Gunn — Indie game art, consistent at scale*

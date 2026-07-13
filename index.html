@@ -3,152 +3,472 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Character Art Pipeline — Demo</title>
+  <title>AI Character Art Pipeline — Consistent Character Art for Creators</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #14161c;
-      color: #e8e8ed;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #0e1018;
+      color: #d8dae0;
+      line-height: 1.6;
     }
     .container {
-      max-width: 960px;
-      width: 100%;
-      padding: 40px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
-    .header {
+
+    /* Hero */
+    .hero {
+      padding: 60px 0 40px;
       text-align: center;
-      margin-bottom: 40px;
+      background: linear-gradient(180deg, #141622 0%, #0e1018 100%);
+      border-bottom: 1px solid #1e2030;
     }
-    .logo {
-      width: 120px;
-      height: 120px;
-      border-radius: 24px;
+    .hero-logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
       margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(120, 80, 255, 0.3);
+      box-shadow: 0 4px 24px rgba(120, 80, 255, 0.3);
+      object-fit: cover;
     }
-    h1 {
-      font-size: 2.2rem;
+    .hero h1 {
+      font-size: 2.4rem;
       background: linear-gradient(135deg, #7850ff, #00c8c8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 8px;
     }
-    .subtitle {
-      color: #8c8ca0;
-      font-size: 1.1rem;
+    .hero-subtitle {
+      color: #8c90a5;
+      font-size: 1.15rem;
+      max-width: 600px;
+      margin: 0 auto 20px;
     }
-    .video-wrapper {
-      background: #1e2028;
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 30px;
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #7850ff, #5533cc);
+      color: white;
+      padding: 12px 32px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
     }
-    .video-wrapper video {
-      width: 100%;
-      display: block;
+    .hero-badge:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 20px rgba(120, 80, 255, 0.4);
     }
-    .features {
+
+    /* Sections */
+    section {
+      padding: 50px 0;
+      border-bottom: 1px solid #181a26;
+    }
+    section:last-of-type { border-bottom: none; }
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 24px;
+      color: #e8eaf0;
+    }
+    h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      color: #e0e2ea;
+    }
+    p, li { color: #9ca0b5; font-size: 0.95rem; }
+    a { color: #00c8c8; }
+
+    /* Gallery grid */
+    .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
       margin: 30px 0;
     }
-    .feature {
-      background: #1e2028;
-      border: 1px solid #2a2d38;
+    .gallery-card {
+      background: #161822;
+      border: 1px solid #1e2030;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .gallery-card:hover { border-color: #3a3e58; }
+    .gallery-card img {
+      width: 100%;
+      display: block;
+    }
+    .gallery-card .caption {
+      padding: 14px 16px;
+      font-size: 0.85rem;
+      color: #8c90a5;
+      border-top: 1px solid #1e2030;
+    }
+    .gallery-card .caption strong {
+      color: #d8dae0;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* Video wrapper (secondary) */
+    .video-wrapper {
+      background: #161822;
+      border: 1px solid #1e2030;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 24px 0;
+    }
+    .video-wrapper video { width: 100%; display: block; }
+
+    /* Feature grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .feature-item {
+      background: #161822;
+      border: 1px solid #1e2030;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .feature-icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .feature-item h4 { color: #e0e2ea; margin-bottom: 4px; font-size: 0.95rem; }
+    .feature-item p { font-size: 0.82rem; color: #7c8098; }
+
+    /* Steps */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 24px 0;
+    }
+    .step {
+      background: #161822;
+      border: 1px solid #1e2030;
       border-radius: 12px;
       padding: 24px;
-      text-align: center;
+      position: relative;
     }
-    .feature-icon {
-      font-size: 2rem;
-      margin-bottom: 12px;
-    }
-    .feature h3 {
-      font-size: 1.05rem;
-      margin-bottom: 6px;
-      color: #fff;
-    }
-    .feature p {
-      color: #8c8ca0;
-      font-size: 0.85rem;
-      line-height: 1.5;
-    }
-    .badge {
-      display: inline-block;
+    .step-num {
+      position: absolute;
+      top: -12px;
+      left: 20px;
       background: linear-gradient(135deg, #7850ff, #00c8c8);
       color: white;
-      padding: 12px 28px;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      margin: 20px 0;
-      text-decoration: none;
-    }
-    .badge:hover {
-      transform: scale(1.02);
-      box-shadow: 0 4px 20px rgba(120, 80, 255, 0.4);
-    }
-    .footer {
-      color: #5a5a70;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
       font-size: 0.85rem;
-      margin-top: 40px;
+    }
+    .step h4 { margin-top: 8px; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+    th {
+      background: #1a1c2a;
+      color: #b0b4c8;
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 2px solid #2a2d40;
+    }
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #1e2030;
+      color: #9ca0b5;
+    }
+    tr:hover td { background: #141622; }
+
+    /* Use cases */
+    .use-case {
+      background: #161822;
+      border: 1px solid #1e2030;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .use-case h3 { margin-bottom: 4px; }
+
+    /* FAQ */
+    .faq-item {
+      border-bottom: 1px solid #1e2030;
+      padding: 16px 0;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question {
+      font-weight: 600;
+      color: #d8dae0;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 30px 0;
       text-align: center;
+      color: #5a5e78;
+      font-size: 0.82rem;
+    }
+    .footer a { color: #5a5e78; text-decoration: underline; }
+    .footer a:hover { color: #8c90a5; }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.6rem; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <img src="logo.jpg" alt="AI Character Art Pipeline" class="logo">
-      <h1>AI Character Art Pipeline</h1>
-      <p class="subtitle">One reference image → Full character bible for indie game devs</p>
-    </div>
 
+<div class="hero">
+  <div class="container">
+    <img src="logo.jpg" alt="AI Character Art Pipeline" class="hero-logo">
+    <h1>AI Character Art Pipeline</h1>
+    <p class="hero-subtitle">One reference image → full character bible: expression sheets, turnaround views, action poses, and style-locked prompts. Built for creators who need on-model art at scale.</p>
+    <a href="https://www.agensi.io/skills/ai-character-art-pipeline" class="hero-badge" target="_blank">Available on Agensi — $7.99</a>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <h2>Gallery</h2>
+    <p style="margin-bottom:20px;">The pipeline takes one reference image and produces a complete character package. Here's what that looks like:</p>
+    <div class="gallery-grid">
+      <div class="gallery-card">
+        <img src="gallery/pipeline-flow.png" alt="Pipeline flow diagram" loading="lazy">
+        <div class="caption"><strong>Pipeline Overview</strong>One reference → AI processing → four deliverable outputs</div>
+      </div>
+      <div class="gallery-card">
+        <img src="gallery/expression-grid.png" alt="Expression grid preview" loading="lazy">
+        <div class="caption"><strong>Expression Sheet</strong>8+ consistent expressions captured from your reference image</div>
+      </div>
+      <div class="gallery-card">
+        <img src="gallery/turnaround.png" alt="Turnaround views" loading="lazy">
+        <div class="caption"><strong>5-Angle Turnaround</strong>Front, 3/4, side, and rear — exact character, every view</div>
+      </div>
+      <div class="gallery-card">
+        <img src="gallery/deliverables.png" alt="Deliverables overview" loading="lazy">
+        <div class="caption"><strong>Deliverables</strong>Expression sheet, turnaround, action poses, and character bible</div>
+      </div>
+      <div class="gallery-card">
+        <img src="gallery/use-cases.png" alt="Use cases" loading="lazy">
+        <div class="caption"><strong>Perfect For</strong>Indie devs, visual novel creators, children's book authors, animators</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Demo Video</h2>
+    <p style="margin-bottom:16px;">See the pipeline concept in action — 17 seconds:</p>
     <div class="video-wrapper">
       <video controls poster="screenshot.jpg" preload="metadata">
         <source src="demo-30s.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </div>
+    <p style="font-size:0.85rem;color:#7c8098;">Direct link: <a href="demo-30s.mp4" target="_blank">demo-30s.mp4</a></p>
+  </div>
+</section>
 
-    <div class="features">
-      <div class="feature">
+<section>
+  <div class="container">
+    <h2>How to Get It</h2>
+    <p>AI Character Art Pipeline is a premium agent skill available exclusively through:</p>
+    <ul style="margin:16px 0 16px 24px;">
+      <li><strong><a href="https://www.agensi.io/skills/ai-character-art-pipeline" target="_blank">Agensi</a></strong> — $7.99 one-time purchase (or 40 credits). Download the SKILL.md, load it into your agent, and generate consistent character art on demand.</li>
+    </ul>
+    <p>Compatible with Claude Code, Codex CLI, Cursor, Gemini CLI, OpenClaw, Windsurf, GitHub Copilot, VS Code, and 15+ other agent platforms that support SKILL.md.</p>
+    <p style="margin-top:16px;"><a href="https://www.agensi.io/skills/ai-character-art-pipeline" target="_blank" class="hero-badge" style="font-size:0.9rem;padding:10px 24px;">Buy on Agensi →</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Why This Exists</h2>
+    <p>The hardest problem in AI-generated character art is <strong>consistency</strong>. An AI that nails a character in one image will change their face, outfit, or proportions in the next — sometimes subtly, sometimes completely.</p>
+    <p style="margin:16px 0;">Without a structured pipeline, every regeneration risks:</p>
+    <ul style="margin-left:24px;">
+      <li>✗ Different facial features from one image to the next</li>
+      <li>✗ Changing outfit colors or design details</li>
+      <li>✗ Proportions that drift between poses</li>
+      <li>✗ No way to reproduce a specific expression or angle</li>
+    </ul>
+    <p style="margin-top:16px;">This pipeline solves that by locking the character's core features from a single reference and generating all variations <strong>on-model</strong>.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Deliverables</h2>
+    <div class="feature-grid">
+      <div class="feature-item">
         <div class="feature-icon">🎭</div>
-        <h3>Expression Grid</h3>
-        <p>8 consistent expressions in one image — happy, sad, surprised, and more</p>
+        <h4>Expression Sheet</h4>
+        <p>8 consistent expressions on one image — happy, sad, surprised, curious, worried, sleepy, playful, and default. All from your single reference.</p>
       </div>
-      <div class="feature">
+      <div class="feature-item">
         <div class="feature-icon">🔄</div>
-        <h3>5-Angle Turnaround</h3>
-        <p>Front, 3/4, side, and rear views — exact same character, every angle</p>
+        <h4>5-Angle Turnaround</h4>
+        <p>Front, 3/4 front, side profile, 3/4 back, and rear views. Exact same character, every angle — no style drift between views.</p>
       </div>
-      <div class="feature">
+      <div class="feature-item">
         <div class="feature-icon">🏃</div>
-        <h3>Action Poses</h3>
-        <p>Any pose you describe — running, jumping, casting, idle — fully consistent</p>
+        <h4>Action Poses</h4>
+        <p>Any pose you describe — running, jumping, casting, idle — fully consistent with your reference character. Dynamic results, every time.</p>
       </div>
-      <div class="feature">
+      <div class="feature-item">
         <div class="feature-icon">📖</div>
-        <h3>Character Bible</h3>
-        <p>Markdown document: color palette, design notes, all prompts, usage guide</p>
+        <h4>Character Bible</h4>
+        <p>Markdown document: color palette extracted from reference, design notes, all generation prompts, and a usage guide for future reproductions.</p>
       </div>
-    </div>
-
-    <div style="text-align: center;">
-      <a href="https://www.agensi.io/skills/ai-character-art-pipeline" class="badge" target="_blank">Available on Agensi — $7.99</a>
-    </div>
-
-    <div class="footer">
-      <p>Built by Elston Gunn — Indie game art, consistent at scale</p>
+      <div class="feature-item">
+        <div class="feature-icon">🔒</div>
+        <h4>Style Lock Prompts</h4>
+        <p>Pre-computed prompt templates that reproduce the character accurately in any scenario. Plug and play with your preferred image model.</p>
+      </div>
     </div>
   </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Drop Reference</h4>
+        <p>Provide a single image of your character — any headshot, full-body render, or concept art. One image is all the pipeline needs to lock the character's core features.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Generate Outputs</h4>
+        <p>The pipeline produces 4 core deliverables using image-to-image AI: expression sheet, turnaround views, action poses, and style-locked prompt templates — all referencing your original image.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Export Bible</h4>
+        <p>A complete character bible is compiled automatically: color palette, design notes, all prompts, and a usage guide. Ready to hand off to any artist or AI agent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Compatibility</h2>
+    <p>Works with any AI agent or IDE that supports SKILL.md skills:</p>
+    <table>
+      <tr><th>Platform</th><th>Status</th><th>Notes</th></tr>
+      <tr><td>Claude Code</td><td>✅</td><td>Full support</td></tr>
+      <tr><td>Codex CLI</td><td>✅</td><td>Full support</td></tr>
+      <tr><td>Cursor</td><td>✅</td><td>Full support</td></tr>
+      <tr><td>Gemini CLI</td><td>✅</td><td>Full support</td></tr>
+      <tr><td>GitHub Copilot</td><td>✅</td><td>Full support</td></tr>
+      <tr><td>OpenClaw</td><td>✅</td><td>Full support</td></tr>
+      <tr><td>Windsurf</td><td>✅</td><td>Full support</td></tr>
+      <tr><td>VS Code</td><td>✅</td><td>Full support</td></tr>
+      <tr><td>+ 20+ agents</td><td>✅</td><td>Any SKILL.md-compatible</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Use Cases</h2>
+
+    <div class="use-case">
+      <h3>🎮 Indie Game Developers</h3>
+      <p>Need character sprites, portraits, and concept art that stays on-model across hundreds of assets. One reference → consistent art for every character in your game. No more re-drawing because the AI changed the design mid-project.</p>
+    </div>
+    <div class="use-case">
+      <h3>📖 Visual Novel Creators</h3>
+      <p>Expression-accurate characters for every dialogue scene. The pipeline generates 8 consistent expressions from one reference, so your protagonist looks the same in happy, sad, and surprised scenes — no style drift between chapters.</p>
+    </div>
+    <div class="use-case">
+      <h3>👶 Children's Book Authors</h3>
+      <p>The same character on every page spread — no style drift from cover to cover. Generate the character in any pose the story needs, with full turnaround sheets for the illustrator's reference.</p>
+    </div>
+    <div class="use-case">
+      <h3>🎬 Animation Pre-Vis</h3>
+      <p>Turnaround sheets and pose references for storyboarding. Lock the character design early so animators don't waste time correcting inconsistent features between shots.</p>
+    </div>
+    <div class="use-case">
+      <h3>🤖 AI Art Power Users</h3>
+      <p>Anyone generating character art with AI who's frustrated by inconsistency. The pipeline provides the prompt engineering and workflow structure to keep results on-model without manual prompt tweaking.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>FAQ</h2>
+    <div class="faq-item">
+      <div class="faq-question">What AI model do I need?</div>
+      <p>Any model with image-to-image capability. The pipeline has been tested with xAI Grok, Midjourney, and Stable Diffusion-based models. The prompt templates work across all of them.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Do I need API keys?</div>
+      <p>The pipeline itself is a prompt-based workflow — no keys required. Your agent uses whatever image generation backend it has access to.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Can I add my own expressions or poses?</div>
+      <p>Absolutely. The pipeline accepts any list of expressions or poses you describe. You're not limited to the defaults — tell it what you need.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Does this work for pixel art?</div>
+      <p>Yes — works especially well for pixel art since the constraints are tighter and small feature changes are more noticeable. The pipeline keeps everything consistent.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">How long does it take?</div>
+      <p>~30 seconds per sheet once the reference is loaded. The full pipeline (expression + turnaround + 2 poses + bible) completes in about 3 minutes.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">Can I use it for non-game projects?</div>
+      <p>Yes — visual novels, children's books, comics, animation pre-vis, and character-driven web apps all benefit from consistent character art.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">What's included in the purchase?</div>
+      <p>A complete SKILL.md file with all pipeline instructions, prompt templates, and usage guide. Drop it into your agent and generate character art immediately.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Safety &amp; Permissions</h2>
+    <table>
+      <tr><th>Scope</th><th>Details</th></tr>
+      <tr><td>Prompt / Text</td><td>Generates structured prompts for your image generation backend. No external API calls from the skill itself.</td></tr>
+      <tr><td>File Scopes</td><td>Reads your reference image. Writes generated outputs locally. Nothing is uploaded.</td></tr>
+      <tr><td>Image Generation</td><td>Uses whatever backend your agent has (local or API-based). The skill only provides the prompt structure.</td></tr>
+    </table>
+    <p style="margin-top:12px;">🔒 No network calls from the skill. No telemetry. No API keys. Your reference image stays local.</p>
+  </div>
+</section>
+
+<div class="footer">
+  <div class="container">
+    <p>Built by <a href="https://www.agensi.io/creators/elston-gunn" target="_blank">Elston Gunn</a> — Indie game art, consistent at scale</p>
+    <p style="margin-top:8px;"><a href="https://www.agensi.io/skills/ai-character-art-pipeline" target="_blank">View on Agensi</a> · <a href="https://github.com/happydestiny79/ai-character-art-pipeline" target="_blank">GitHub</a> · $7.99 one-time</p>
+  </div>
+</div>
+
 </body>
 </html>
